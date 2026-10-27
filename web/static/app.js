@@ -4,7 +4,23 @@ const bannerEl = document.getElementById("banner");
 const errorEl = document.getElementById("error-text");
 const newBtn = document.getElementById("btn-new");
 
+const SESSION_KEY = "twenty-forty-eight-v1";
+
 let state = { cells: null, score: 0, won: false, game_over: false };
+
+function persistState() {
+  if (state.cells) AppSession.save(SESSION_KEY, state);
+}
+
+function restoreState() {
+  const saved = AppSession.load(SESSION_KEY);
+  if (!saved?.cells) return false;
+  state = saved;
+  render();
+  return true;
+}
+
+AppSession.wireHelpSave(SESSION_KEY, () => state);
 
 const KEY_TO_MOVE = {
   ArrowUp: "W",
@@ -79,8 +95,10 @@ async function newGame() {
     setError(data.detail || "Could not start game.");
     return;
   }
+  AppSession.clear(SESSION_KEY);
   state = { ...data, already_won: false };
   render();
+  persistState();
 }
 
 async function sendMove(move) {
@@ -103,6 +121,7 @@ async function sendMove(move) {
   if (data.changed) {
     state = data;
     render();
+    persistState();
   }
 }
 
@@ -114,4 +133,4 @@ document.addEventListener("keydown", (event) => {
 });
 
 newBtn.addEventListener("click", () => newGame());
-newGame();
+if (!restoreState()) newGame();
