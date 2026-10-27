@@ -156,7 +156,7 @@ def cells_to_board(cells: list[list[int | None]]) -> dict[tuple[int, int], int |
     for y in range(SIZE):
         for x in range(SIZE):
             value = cells[y][x]
-            board[(x, y)] = value if value is None else int(value)
+            board[(x, y)] = BLANK if value is None else int(value)
     return board
 
 
