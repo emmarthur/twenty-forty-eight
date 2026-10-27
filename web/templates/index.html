@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Twenty Forty-Eight</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Outfit:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <nav class="page-nav" aria-label="Page">
+        <a class="nav-link" href="/help">Help</a>
+      </nav>
+
+      <header class="hero">
+        <h1>2048</h1>
+        <p class="tagline">Join the tiles, reach 2048</p>
+      </header>
+
+      <section class="hud card">
+        <div class="score-box">
+          <span class="score-label">Score</span>
+          <span id="score" class="score-value">0</span>
+        </div>
+        <button type="button" id="btn-new" class="btn btn-new">New game</button>
+      </section>
+
+      <p id="banner" class="banner" hidden></p>
+
+      <section class="board-wrap" aria-label="Game board">
+        <div id="grid" class="grid"></div>
+      </section>
+
+      <p class="hint">Use arrow keys or W A S D</p>
+      <p id="error-text" class="error" role="alert" hidden></p>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
